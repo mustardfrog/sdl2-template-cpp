@@ -56,12 +56,10 @@ void Game::handleEvent() {
     }
 }
 
-void Game::update() {
-    ball->update();
-}
+void Game::update() { ball->update(); }
 
 void Game::render() {
-    SDL_SetRenderDrawColor(renderer, 0,0,0, 10);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 10);
     SDL_RenderClear(renderer);
     // render shits here
 
