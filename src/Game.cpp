@@ -1,11 +1,12 @@
 #include "Game.hpp"
-#include "Ball.hpp"
+#include "MovingBox.hpp"
+#include "Shapes.hpp"
 #include <cstdio>
 
 Game::Game(){};
 Game::~Game(){};
 
-Ball *ball = new Ball();
+Box *box = new Box();
 
 SDL_Renderer *Game::renderer = nullptr;
 
@@ -19,16 +20,16 @@ void Game::init() {
         printf("cannot start sdl");
     }
 
-    window = SDL_CreateWindow(
+    m_Window = SDL_CreateWindow(
         "title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600,
         SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
 
-    if (window == NULL) {
-        printf("window is null");
-        isRunning = false;
+    if (m_Window == NULL) {
+        printf("m_Window is null");
+        m_IsRunning = false;
     }
 
-    renderer = SDL_CreateRenderer(window, -1, 0);
+    renderer = SDL_CreateRenderer(m_Window, -1, 0);
 
     if (renderer) {
         SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -36,10 +37,10 @@ void Game::init() {
 
     if (renderer == NULL) {
         printf("renderer is null");
-        isRunning = false;
+        m_IsRunning = false;
     }
 
-    isRunning = true;
+    m_IsRunning = true;
 }
 
 void Game::handleEvent() {
@@ -48,7 +49,7 @@ void Game::handleEvent() {
 
     switch (event.type) {
     case SDL_QUIT:
-        isRunning = false;
+        m_IsRunning = false;
         break;
 
     default:
@@ -56,20 +57,25 @@ void Game::handleEvent() {
     }
 }
 
-void Game::update() { ball->update(); }
+void Game::update() { box->update(); }
 
 void Game::render() {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 10);
     SDL_RenderClear(renderer);
+
     // render shits here
 
-    ball->render(renderer);
+    // draw circles from Shapes.hpp
+    SDL_SetRenderDrawColor(renderer, 0, 100, 100, 10);
+    SDL_RenderFillCircle(renderer, 80,80, 32);
+
+    box->render(renderer);
 
     SDL_RenderPresent(renderer);
 }
 
 void Game::clean() {
-    SDL_DestroyWindow(window);
+    SDL_DestroyWindow(m_Window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
 }

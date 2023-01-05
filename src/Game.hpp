@@ -16,9 +16,9 @@ class Game {
     void update();
     void render();
     void clean();
-    bool running() { return isRunning; };
+    bool running() { return m_IsRunning; };
 
   private:
-    bool isRunning = false;
-    SDL_Window *window;
+    bool m_IsRunning = false;
+    SDL_Window *m_Window;
 };

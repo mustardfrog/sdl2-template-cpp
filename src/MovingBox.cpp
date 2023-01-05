@@ -1,8 +1,9 @@
-#include "Ball.hpp"
-#include "Game.hpp"
+#include "MovingBox.hpp"
 #include <SDL2/SDL_render.h>
 
-Ball::Ball() {
+// example file
+
+Box::Box() {
     ball.h = 32.0f;
     ball.w = 32.0f;
     ball.x = 132.0f;
@@ -12,9 +13,9 @@ Ball::Ball() {
     ballSpeed.y = 8.0f;
 };
 
-Ball::~Ball(){};
+Box::~Box(){};
 
-void Ball::update() {
+void Box::update() {
     ball.x += ballSpeed.x;
     ball.y += ballSpeed.y;
 
@@ -24,7 +25,7 @@ void Ball::update() {
         ballSpeed.y *= -1;
 }
 
-void Ball::render(SDL_Renderer *renderer) {
+void Box::render(SDL_Renderer *renderer) {
     SDL_SetRenderDrawColor(renderer, 100, 100, 100, 10);
     SDL_RenderDrawRect(renderer, &ball);
 

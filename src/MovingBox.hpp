@@ -1,12 +1,13 @@
+#pragma once
 #include <SDL2/SDL.h>
 
-class Ball {
+// example file
+class Box {
 
   public:
-    Ball();
-    ~Ball();
+    Box();
+    ~Box();
 
-    SDL_Rect ball;
 
     typedef struct Vector2 {
         float x;
@@ -19,4 +20,5 @@ class Ball {
     void render(SDL_Renderer *renderer);
 
   private:
+    SDL_Rect ball;
 };
